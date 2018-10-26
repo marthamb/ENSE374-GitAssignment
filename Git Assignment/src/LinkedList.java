@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class LinkedList
 {
@@ -22,11 +23,61 @@ public class LinkedList
 	int elementCount;
 
 	
-	public static void main()//String[] args)
+	public static void main(String[] args)
 	{
 		LinkedList SingleLL=new LinkedList();
-		ListElement leNew= new ListElement();
-		SingleLL.addElement(leNew);
+		
+		Scanner entrada = new Scanner(System.in);
+		
+		System.out.println("To Add a node enter: add");
+		System.out.println("To Retrieve a node enter: retrieve");
+		System.out.println("To Delete a node enter: delete");
+		System.out.println("To Print the linked list from the tail enter: tail");
+		System.out.println("To Print the linked list from the head enter: head");
+		System.out.println("To exit the program enter: exit");
+		
+		String action="";
+		while(!action.equals("extit"))
+		{
+			System.out.println("Enter action");
+			action = entrada.nextLine();
+			
+			if (action.equals("add"))
+			{
+				System.out.println("Enter 1 value at time");
+				int val = Integer.parseInt(entrada.nextLine());
+				ListElement leNew= new ListElement();
+				leNew.setData(val);
+				SingleLL.addElement(leNew);
+			}
+			else if (action.equals("retrieve"))
+			{
+				System.out.println("Enter position of the value to see, strarting on 1");
+				int index = Integer.parseInt(entrada.nextLine());
+				System.out.println(SingleLL.getElement(index).getData());
+			}
+			else if (action.equals("delete"))
+			{
+				System.out.println("Enter position of the value to delete, strarting on 1");
+				int index = Integer.parseInt(entrada.nextLine());
+				SingleLL.deleteElement(index);
+			}
+			else if (action.equals("tail"))
+			{
+				SingleLL.printLinkedListTail();
+			}
+			else if (action.equals("head"))
+			{
+				SingleLL.printLinkedListHead();
+			}
+			else if (action.equals("exit"))
+			{
+				System.out.println("Bye");
+				break;
+			}
+		}
+		
+		
 	}
 	
 	//Add a node
@@ -43,6 +94,7 @@ public class LinkedList
 			leTail.setNext(leAdd);
 			leTail=leAdd;
 		}
+		elementCount++;
 	}
 	
 	//Retrieve a node 
@@ -102,6 +154,7 @@ public class LinkedList
 				return true;
 			}
 		}
+		System.out.println("");
 		return false;
 	}
 	
