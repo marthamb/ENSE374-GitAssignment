@@ -9,14 +9,14 @@
 public class ListElement 
 {
 	private ListElement next;
-	private ListElement previous;
+	//private ListElement previous;
 	private int data;
 
 	public ListElement()
 	{
 		this.data=0;
 		this.next=null;
-		this.previous=null;
+		//this.previous=null;
 	}
 	
 	/**
@@ -32,6 +32,21 @@ public class ListElement
 	public int getData()
 	{
 		return this.data;
+	}
+	
+	/**
+	 * @param le
+	 *   Next element
+	 *@return none
+	 */
+	public void setNext(ListElement le)
+	{
+		this.next=le;
+	}
+	
+	public ListElement getNext()
+	{
+		return this.next;
 	}
 
 }
