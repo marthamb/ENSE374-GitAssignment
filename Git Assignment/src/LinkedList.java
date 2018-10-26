@@ -92,6 +92,7 @@ public class LinkedList
 		else 
 		{
 			leTail.setNext(leAdd);
+			leAdd.setPrevious(leTail);
 			leTail=leAdd;
 		}
 		elementCount++;
@@ -104,7 +105,7 @@ public class LinkedList
 		{
 			le=leHead;
 			int i=1;
-			while ( le!=null && i<=index)
+			while ( le!=null && i<index)
 			{
 				le=le.getNext();
 				i++;
@@ -129,15 +130,25 @@ public class LinkedList
 			int i=1;
 			while ( le!=null && i<index)
 			{
-				lePrev=le;
 				le=le.getNext();
 				i++;
 			}
 			
+			lePrev=le.getPrevious();
 			if (lePrev==null)
 			{
+				if(leHead==leTail)
+				{
+					leTail=leTail.getNext();
+				}
 				leHead=leHead.getNext();
+				if(leHead!=null)
+				{
+					leHead.setPrevious(null);
+				}
+				
 				le=leHead;
+				System.out.println("successful delete");
 				return true;
 			}
 			else if (le!=null)
@@ -145,36 +156,33 @@ public class LinkedList
 				if (le.getNext()==null) 
 				{
 					lePrev.setNext(null);
+					leTail=lePrev;
 				} 
 				else 
 				{
 					lePrev.setNext(le.getNext());
+					lePrev.getNext().setPrevious(lePrev);
 				}
 				le=leHead;
+				System.out.println("successful delete");
 				return true;
 			}
 		}
-		System.out.println("");
+		System.out.println("any element was deleted");
 		return false;
 	}
 	
 	// Print the linked list from the tail
 	public void printLinkedListTail()
 	{
-		if(leHead!=null)
+		le=leTail;
+		while (le!=null) 
 		{
-			printTail(leHead);
+			System.out.println(le.getData());
+			 le=le.getPrevious();
 		}
 	}
-	public void printTail(ListElement element)
-	{
-		if(element.getNext()!=null)
-		{
-			printTail(element.getNext());
-		}
-		System.out.println(element.getData());
-	}
-	
+
 	// Print the linked list from the head
 	 public void printLinkedListHead()
 	 {
